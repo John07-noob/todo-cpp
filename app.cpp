@@ -1,6 +1,6 @@
 /*
 Author  : John07-noob
-Date    : Nov/08/2020
+Date    : Nov/09/2020
 */
 #include <iostream>
 #include <fstream>
@@ -10,11 +10,18 @@ void clearScreen() {
     system("clear");
 }
 
-void append_file(string user_input) {
+void append_file() {
+    while(true){
+        string user_input;
+        cout << "Insert Here (q): ";
+        getline(cin, user_input);
+        if (user_input == "q") {
+            break;
+        }
     fstream file;
     file.open("ToDo.txt", ios::app);
     file << user_input << endl;
-    file.close();
+    file.close();}
 }
 
 void list_file() {
@@ -24,11 +31,25 @@ void list_file() {
         cout << file << endl;
     }
     listFile.close();
+    while(true){
+    string user_input;
+    cout << "Insert Here (q): ";
+    getline(cin, user_input);
+    if (user_input == "q") {
+        break;
+    }else {
+        cout << "Invalid Command!\n";
+    }}
 }
 
-void remove_line(string user_input) {
-    string line;
-
+void remove_line() {
+	while(true){
+		string line, user_input;
+		cout << "Insert Here (q): ";
+		getline(cin, user_input);
+		if (user_input == "q") {
+			break;
+		}
     ifstream file;
     file.open("ToDo.txt");
     ofstream temp;
@@ -41,34 +62,35 @@ void remove_line(string user_input) {
     temp.close();
     file.close();
     remove("ToDo.txt");
-    rename("temp.txt", "ToDo.txt");
+    rename("temp.txt", "ToDo.txt");}
 }
 
 
 int main() {
     string user_input;
 
+while(true){
     cout << "Welcome To ToDo App\n";
     cout << "1.Add item\n";
     cout << "2.List item\n";
     cout << "3.Remove item\n";
     cout << "4.Quit\n";
-    cout << "]>";
+    cout << "Insert Here: ";
     getline(cin, user_input);
 
     if (user_input == "1") {
         clearScreen();
-        cout << "Insert Here: ";
-        getline(cin, user_input);
-        append_file(user_input);
+        append_file();
+        clearScreen();
     } else if (user_input == "2") {
         clearScreen();
         list_file();
+        clearScreen();
     } else if (user_input == "3") {
         clearScreen();
-        cout << "What would you like to remove?\n";
-        cout << "]>";
-        getline(cin, user_input);
-        remove_line(user_input);
-    }
+        remove_line();
+		clearScreen();
+    }else if (user_input == "4") {
+		break;
+	}}
 }
